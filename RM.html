@@ -1,1 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose UserID</title>
+</head>
+<body>
+    <h2>Choose UserID</h2>
+    <label for="userID">Select UserID:</label>
+    <select id="userID">
+    </select>
+    <br><br>
+    <button onclick="checkUserID()">Check UserID</button>
+    <p id="result"></p>
+
+    <script>
+        // Function to fetch JSON data from GitHub
+        function fetchJSON() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var json = JSON.parse(this.responseText);
+                    var select = document.getElementById("userID");
+                    json.AzepSCO.forEach(function(id) {
+                        var option = document.createElement("option");
+                        option.value = id;
+                        option.text = "UserID " + id;
+                        select.appendChild(option);
+                    });
+                }
+            };
+            xhr.open("GET", "https://raw.githubusercontent.com/malekbro112/b/main/Real.json", true);
+            xhr.send();
+        }
+
+        // Function to check if the selected UserID is allowed
+        function checkUserID() {
+            var selectedUserID = document.getElementById("userID").value;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var json = JSON.parse(this.responseText);
+                    var allowedUsers = json.AzepSCO;
+                    if (allowedUsers.includes(parseInt(selectedUserID))) {
+                        document.getElementById("result").innerText = "UserID " + selectedUserID + " is allowed.";
+                    } else {
+                        document.getElementById("result").innerText = "UserID " + selectedUserID + " is not allowed.";
+                    }
+                }
+            };
+            xhr.open("GET", "https://raw.githubusercontent.com/malekbro112/b/main/Real.json", true);
+            xhr.send();
+        }
+
+        // Call fetchJSON function when the page loads
+        window.onload = fetchJSON;
+    </script>
+</body>
+</html>
 
