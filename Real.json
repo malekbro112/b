@@ -1,7 +1,25 @@
 
+
 {
-  "AzepSCO": [
+  "AzepResturantPOS": [
     1,
-    4729878040
+    4729878040,
+    1234567890,
+    9876543210,
+    1357924680
+  ],
+  "AzepVig": [
+    1,
+    2
+  ],
+  "AzepAutomaticDoors": [
+    3,
+    4,
+    5
+  ],
+  "AzepPaveAddonForVig": [
+    6,
+    7,
+    8
   ]
 }
